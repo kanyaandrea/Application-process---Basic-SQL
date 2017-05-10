@@ -66,14 +66,27 @@ def delete_by_domain():
     print_out_data(cursor)
 
 
-def all_data_mentors(database):
-    database = ui.get_inputs(["Please enter a database: "])
+def all_data_database():
+    database = ["Please enter a database for search: "]
+    data_list = ui.get_inputs(database)
+    data = ''.join(data_list)
     cursor = main.connection().cursor()
     cursor.execute("""SELECT * FROM %s 
-                    ORDER BY id;""" % database)
+                    ORDER BY id;""" % data)
     print_out_data(cursor)
 
 
+def select_data_database():
+    attribute = ["Please enter an attribute for search: "]
+    database = ["Please enter a database for search: "]
+    data_in_list1 = ui.get_inputs(attribute)
+    data_in_list2 = ui.get_inputs(database)
+    data1 = ''.join(data_in_list1)
+    data2 = ''.join(data_in_list2)
+    cursor = main.connection().cursor()
+    cursor.execute("""SELECT {} FROM {}
+                    ORDER BY id;""" .format(data1, data2))
+    print_out_data(cursor)
 
 
 

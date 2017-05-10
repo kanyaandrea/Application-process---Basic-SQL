@@ -38,6 +38,10 @@ def choose():
         queries.change_phonenumber()
     elif option == "7":
         queries.delete_by_domain()
+    elif option == "8":
+        queries.all_data_database()
+    elif option == "9":
+        queries.select_data_database()
     elif option == "0":
         sys.exit(0)
     else:
@@ -51,7 +55,9 @@ def handle_menu():
                "Get data from the unknown girl by her e-mail address",
                "Add the new applicants",
                "Change pnone number(s)",
-               "Delete by domain"]
+               "Delete by domain",
+               "General querie: Select all data from database",
+               "General querie: Select data from database (attributes shuold separate by comma and sapce)"]
     ui.print_menu("Main menu", options, "Exit program")
 
 

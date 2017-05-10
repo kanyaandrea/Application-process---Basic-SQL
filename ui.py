@@ -27,10 +27,9 @@ def print_error_message(message):
     print("Error: %s" % message)
 
 
-def get_inputs(list_labels):
+def get_inputs(input_list):
     inputs = []
-
-    for item in list_labels:
+    for item in input_list:
         input_required = True
         while input_required:
             user_input = input(str(item))
