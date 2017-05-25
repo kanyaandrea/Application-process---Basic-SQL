@@ -12,6 +12,12 @@ def print_out_data(cursor):
     ui.print_table(table)
 
 
+def fetch_data(cursor):
+    rows = list(cursor.fetchall())
+    # rows.insert(0, [row[0] for row in cursor.description])
+    return rows
+
+
 def get_firstname_lastname_mentors(cursor):
     cursor.execute("""SELECT first_name, last_name FROM mentors;""")
     print_out_data(cursor)
