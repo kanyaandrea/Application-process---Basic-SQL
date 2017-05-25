@@ -1,5 +1,6 @@
 import ui
 import config
+import psycopg2
 
 
 def print_out_data(cursor):
@@ -35,12 +36,15 @@ def get_data_unkowngirl(cursor):
 
 
 def add_new_applicant(cursor):
-    cursor.execute(""" INSERT INTO applicants (id, first_name, last_name, phone_number, email, application_code)
-                        VALUES (11, 'Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823)
-                        ;""")
-    cursor.execute(""" SELECT * FROM applicants
-                        WHERE application_code = 54823 ;""")
-    print_out_data(cursor)
+    try:
+        cursor.execute(""" INSERT INTO applicants (id, first_name, last_name, phone_number, email, application_code)
+                            VALUES (11, 'Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823)
+                            ;""")
+        cursor.execute(""" SELECT * FROM applicants
+                            WHERE application_code = 54823 ;""")
+        print_out_data(cursor)
+    except psycopg2.IntegrityError:
+        print("Information already exists.")
 
 
 def change_phonenumber(cursor):
@@ -53,10 +57,13 @@ def change_phonenumber(cursor):
 
 
 def delete_by_domain(cursor):
-    cursor.execute("""DELETE FROM applicants
-                    WHERE email LIKE '%@mauriseu.net';""")
-    cursor.execute("""SELECT * FROM applicants ORDER BY id;""")
-    print_out_data(cursor)
+    try:
+        cursor.execute("""DELETE FROM applicants
+                        WHERE email LIKE '%@mauriseu.net';""")
+        cursor.execute("""SELECT * FROM applicants ORDER BY id;""")
+        print_out_data(cursor)
+    except psycopg2.IntegrityError:
+            print("Information already deleted.")
 
 
 def all_data_database(cursor):
