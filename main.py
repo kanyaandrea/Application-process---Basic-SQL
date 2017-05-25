@@ -2,6 +2,7 @@ import sys
 import os
 import ui
 import queries
+from queries import print_out_data
 import psycopg2
 import config
 
@@ -10,23 +11,23 @@ def choose():
     inputs = ui.get_inputs(["Please enter a number: "])
     option = inputs[0]
     if option == "1":
-        queries.get_firstname_lastname_mentors(config.connection())
+        print_out_data(queries.get_firstname_lastname_mentors(config.connection()))
     elif option == "2":
-        queries.get_nickname_mentor_miskolc(config.connection())
+        print_out_data(queries.get_nickname_mentor_miskolc(config.connection()))
     elif option == "3":
-        queries.get_data_carol(config.connection())
+        print_out_data(queries.get_data_carol(config.connection()))
     elif option == "4":
-        queries.get_data_unkowngirl(config.connection())
+        print_out_data(queries.get_data_unkowngirl(config.connection()))
     elif option == "5":
         queries.add_new_applicant(config.connection())
     elif option == "6":
-        queries.change_phonenumber(config.connection())
+        print_out_data(queries.change_phonenumber(config.connection()))
     elif option == "7":
         queries.delete_by_domain(config.connection())
     elif option == "8":
-        queries.all_data_database(config.connection())
+        print_out_data(queries.all_data_database(config.connection()))
     elif option == "9":
-        queries.select_data_database(config.connection())
+        print_out_data(queries.select_data_database(config.connection()))
     elif option == "0":
         sys.exit(0)
     else:
