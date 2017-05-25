@@ -3,45 +3,30 @@ import os
 import ui
 import queries
 import psycopg2
-
-
-def connection():
-    try:
-        # setup connection string
-        connect_str = "dbname='andreakanya' user='andreakanya' host='' password='misamaci79'"
-        # use our connection values to establish a connection
-        conn = psycopg2.connect(connect_str)
-        # set autocommit option, to do every query when we call it
-        conn.autocommit = True
-        # create a psycopg2 cursor that can execute queries
-        cursor = conn.cursor()
-        return conn
-    except Exception as e:
-        print("Uh oh, can't connect. Invalid dbname, user or password?")
-        print(e)
+import config
 
 
 def choose():
     inputs = ui.get_inputs(["Please enter a number: "])
     option = inputs[0]
     if option == "1":
-        queries.get_firstname_lastname_mentors()
+        queries.get_firstname_lastname_mentors(config.connection())
     elif option == "2":
-        queries.get_nickname_mentor_miskolc()
+        queries.get_nickname_mentor_miskolc(config.connection())
     elif option == "3":
-        queries.get_data_carol()
+        queries.get_data_carol(config.connection())
     elif option == "4":
-        queries.get_data_unkowngirl()
+        queries.get_data_unkowngirl(config.connection())
     elif option == "5":
-        queries.add_new_applicant()
+        queries.add_new_applicant(config.connection())
     elif option == "6":
-        queries.change_phonenumber()
+        queries.change_phonenumber(config.connection())
     elif option == "7":
-        queries.delete_by_domain()
+        queries.delete_by_domain(config.connection())
     elif option == "8":
-        queries.all_data_database()
+        queries.all_data_database(config.connection())
     elif option == "9":
-        queries.select_data_database()
+        queries.select_data_database(config.connection())
     elif option == "0":
         sys.exit(0)
     else:
@@ -56,8 +41,8 @@ def handle_menu():
                "Add the new applicants",
                "Change pnone number(s)",
                "Delete by domain",
-               "General querie: Select all data from database",
-               "General querie: Select data from database (attributes shuold separate by comma and sapce)"]
+               "General querie: Select all data from table",
+               "General querie: Select data from table (attributes shuold separate by comma and sapce)"]
     ui.print_menu("Main menu", options, "Exit program")
 
 
