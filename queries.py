@@ -3,6 +3,7 @@ import config
 import psycopg2
 
 
+# Queries for printing out on console
 def print_out_data(cursor):
     # Fetch the result of the last execution
     rows = cursor.fetchall()  # list of tuples
@@ -12,33 +13,27 @@ def print_out_data(cursor):
     ui.print_table(table)
 
 
-def fetch_data(cursor):
-    rows = list(cursor.fetchall())
-    # rows.insert(0, [row[0] for row in cursor.description])
-    return rows
-
-
 def get_firstname_lastname_mentors(cursor):
     cursor.execute("""SELECT first_name, last_name FROM mentors;""")
-    print_out_data(cursor)
+    return cursor
 
 
 def get_nickname_mentor_miskolc(cursor):
     cursor.execute(""" SELECT nick_name FROM mentors
                         WHERE city = 'Miskolc';""")
-    print_out_data(cursor)
+    return cursor
 
 
 def get_data_carol(cursor):
     cursor.execute(""" SELECT concat(first_name, ' ', last_name) AS full_name, phone_number FROM applicants
                         WHERE first_name = 'Carol';""")
-    print_out_data(cursor)
+    return cursor
 
 
 def get_data_unkowngirl(cursor):
     cursor.execute(""" SELECT concat(first_name, ' ', last_name) AS full_name, phone_number FROM applicants
                         WHERE email LIKE '%@adipiscingenimmi.edu';""")
-    print_out_data(cursor)
+    return cursor
 
 
 def add_new_applicant(cursor):
@@ -59,7 +54,7 @@ def change_phonenumber(cursor):
                         WHERE first_name = 'Jemima' AND last_name = 'Foreman';""")
     cursor.execute(""" SELECT phone_number FROM applicants
                         WHERE first_name = 'Jemima' AND last_name = 'Foreman';""")
-    print_out_data(cursor)
+    return cursor
 
 
 def delete_by_domain(cursor):
@@ -78,7 +73,7 @@ def all_data_database(cursor):
     data = ''.join(data_list)
     cursor.execute("""SELECT * FROM %s 
                     ORDER BY id;""" % data)
-    print_out_data(cursor)
+    return cursor
 
 
 def select_data_database(cursor):
@@ -90,7 +85,68 @@ def select_data_database(cursor):
     data2 = ''.join(data_in_list2)
     cursor.execute("""SELECT {} FROM {}
                     ORDER BY id;""" .format(data1, data2))
-    print_out_data(cursor)
+    return cursor
 
 
+# Queries for webpage using flask
+def fetch_data(cursor):
+    rows = list(cursor.fetchall())
+    return rows
+
+
+def fetch_data_title(cursor):
+    rows = list(cursor.fetchall())
+    rows_title = [row[0] for row in cursor.description]
+    return rows_title
+
+
+def select_mentors(cursor):
+    cursor.execute(""" SELECT mentors.first_name, mentors.last_name, schools.name, schools.country
+                        FROM mentors
+                        LEFT JOIN schools
+                        ON(mentors.city = schools.city)
+                        ORDER BY mentors.id ASC
+                        ;""")
+    return cursor
+
+
+def select_schools(cursor):
+    cursor.execute(""" SELECT mentors.first_name, mentors.last_name, schools.name, schools.country
+                        FROM mentors
+                        RIGHT JOIN schools
+                        ON(mentors.city = schools.city)
+                        ORDER BY mentors.id ASC
+                        ;""")
+    return cursor
+
+
+def count_mentors(cursor):
+    cursor.execute(""" SELECT schools.country, COUNT(mentors)
+                        FROM mentors
+                        RIGHT JOIN schools
+                        ON(mentors.city = schools.city)
+                        GROUP BY schools.country
+                        ORDER BY schools.country ASC
+                        ;""")
+    return cursor
+
+
+def select_contacts(cursor):
+    cursor.execute(""" SELECT schools.name, mentors.first_name, mentors.last_name
+                        FROM schools
+                        LEFT JOIN mentors
+                        ON(mentors.id = schools.contact_person)
+                        ORDER BY schools.name ASC
+                        ;""")
+    return cursor
+
+
+def select_contacts(cursor):
+    cursor.execute(""" SELECT schools.name, mentors.first_name, mentors.last_name
+                        FROM schools
+                        LEFT JOIN mentors
+                        ON(mentors.id = schools.contact_person)
+                        ORDER BY schools.name ASC
+                        ;""")
+    return cursor
 
