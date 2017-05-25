@@ -12,11 +12,17 @@ table {
     border-collapse: collapse;
     max-width: 900px;
 }
+
 td, th {
-    border: 1px solid #777;
+    border: 2px solid pink;
     padding: 3px 7px;
     text-align: left;
 }
+thead {
+    background-color: pink
+}
+
+{
 
 .button {
     display: inline-block;
