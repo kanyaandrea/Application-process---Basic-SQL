@@ -1,64 +1,70 @@
+
+html { 
+    background: url(/static/images/data.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 * {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Currier New', Geneva, Verdana, sans-serif;
     font-size: 14px;
-    transition: 0.3s;
 }
+
 h1 {
-    font-size: 20px;
+    font-size: 25px;
     color: pink;
+    font-weight: bolder;
+    margin: 50px 40px;
 }
+
 table {
-    border: 2px solid #000;
+    border: 2px solid pink;
     border-collapse: collapse;
     max-width: 900px;
+    margin: 10px 40px;
 }
 
 td, th {
     border: 2px solid pink;
-    padding: 3px 7px;
+    padding: 10px;
     text-align: left;
 }
+
 thead {
     background-color: pink
 }
 
-{
-
 .button {
     display: inline-block;
-    background: #cecece;
-    border-radius: 2px;
-    padding: 5px 7px;
-    color: #333;
-    margin: 0px 0 15px;
-    text-decoration: none;
-    border: 1px solid #555;
+    background: purple;
+    border-radius: 1px;
+    padding: 10px 15px;
+    color: white;
+    margin: 10px 40px;
+    border: 1px solid white;
 }
+
 .button:hover {
     opacity: 0.8;
-    text-decoration: none;
-    
+    text-decoration: underline;
 }
-input, select, textarea {
-    display: block;
-    margin: 0 0 10px;
-}
-label {
-    display: block;
-}
-input[type="submit"]{
-    text-transform: capitalize;
-    cursor: pointer;
-}
-.icon {
-    width: 20px;
+
+li {
+    color:purple;
+    line-height: 30px;
+    margin: 10px 40px;
+    font-size: 20px;
 }
 
 a {
     text-decoration: none;
     color:purple;
     font-weight: 600;
+    font-size: 20px;
 }
+
 a:hover {
     text-decoration: underline
 }

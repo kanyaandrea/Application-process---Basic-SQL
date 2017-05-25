@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> {{ title }} </title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <title> {{ title }} </title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-</head>
-
-<body>
-    <h1> {{ title }} </h1>
-        <ul>
-            <li><a href="/mentors">Mentors with school location</a></li>
-            <li><a href="/all-school">All school - with mentors if there is any </a></li>
-            <li><a href="/mentors-by-country">Number of the mentors per country</a></li>
-            <li><a href="/contacts">Schools with contact persons</a></li>
-            <li><a href="/applicants">Applicants</a></li>
-            <li><a href="/applicants-and-mentors">Applicants with assigned mentors</a></li>
-        </ul>    
-</body>
-
+    <body class="frontpage">
+        <h1> {{ title }} </h1>
+            <ul>
+                <li><a href="/mentors">Mentors with school location</a></li>
+                <li><a href="/all-school">All school - with mentors if there is any </a></li>
+                <li><a href="/mentors-by-country">Number of the mentors per country</a></li>
+                <li><a href="/contacts">Schools with contact persons</a></li>
+                <li><a href="/applicants">Applicants</a></li>
+                <li><a href="/applicants-and-mentors">Applicants with assigned mentors</a></li>
+            </ul>    
+    </body>
 </html>
