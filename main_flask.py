@@ -39,19 +39,25 @@ def get_mentors_by_country():
 def get_contacts():
     contacts = fetch_data(queries.select_contacts(config.connection()))
     contacts_title = fetch_data_title(queries.select_contacts(config.connection()))
-    return render_template("general.html", table=contacts, tabletitle=contacts_title, 
+    return render_template("general.html", table=contacts, tabletitle=contacts_title,
     title="Schools with contact persons")
 
 
 @app.route("/applicants")
 def get_applicants():
-    return render_template("general.html", title="Applicants")
+    applicants = fetch_data(queries.select_applicants(config.connection()))
+    applicants_title = fetch_data_title(queries.select_applicants(config.connection()))
+    return render_template("general.html", table=applicants, tabletitle=applicants_title, title="Applicants")
 
 
 @app.route("/applicants-and-mentors")
 def get_applicants_and_mentors():
-    return render_template("general.html", title="Applicants with assigned mentors")
+    applicants_mentors = fetch_data(queries.select_applicants_with_mentors(config.connection()))
+    applicants_mentors_title = fetch_data_title(queries.select_applicants_with_mentors(config.connection()))
+    return render_template("general.html", table=applicants_mentors, tabletitle=applicants_mentors_title,
+                            title="Applicants with assigned mentors")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=None)
+
